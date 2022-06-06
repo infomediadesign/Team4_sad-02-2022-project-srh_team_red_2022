@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
+import postRoutes from './routes/posts.js';
+
 const app = express();
 
 //Setup of the body parser so that we can send our requests for e.g: image and imageUrl
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({
 
 // To initialise cors and call it as a function
 app.use(cors());
-
+app.use('/posts', postRoutes);
 // Setup/Connection for Mongodb cloud database using Atlas to create cluster
 // Connect Server Application to the datatbase https://www.mongodb.com/cloud/atlas
 
@@ -30,4 +32,4 @@ mongoose.connect(CONNECTION_URL, {
         useUnifiedTopology: true
     }) //We have set to true to avoid the warnings and errors in the console.
     .then(() => app.listen(PORT, () => console.log(`Server Running on port: http://localhost:${PORT}`))) //Using .then async function to return a promise i.e success message if server is running successfully
-    .catch((error) => console.log(`${error} did not connect`)); //to catch error if server is not running properly.
+    .catch((error) => console.log(error.message)); //to catch error if server is not running properly.
