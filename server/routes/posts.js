@@ -3,8 +3,8 @@ import { deletePost } from '../../client/src/api/index.js';
 import {
     getPosts,
     createPost,
-    updatePost,
-    deletePost
+    updatePost
+    
 } from '../controllers/posts.js';
 const router = express.Router();
 router.get('/', getPosts);
