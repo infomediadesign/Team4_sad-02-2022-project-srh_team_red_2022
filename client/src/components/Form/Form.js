@@ -5,14 +5,14 @@ import FileBase from 'react-file-base64';
 
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
-import { updatePost } from '../../../../server/controllers/posts';
+
 import { useSelector } from 'react-redux';
 
 
 // on clicking 3 dots, ID of that post is passed to the FORM Component
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
-  // the find method returns only 1 thing
+// the find method returns only 1 thing
   const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId): null );
 
 
