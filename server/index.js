@@ -31,5 +31,5 @@ mongoose.connect(CONNECTION_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }) //We have set to true to avoid the warnings and errors in the console.
-    .then(() => app.listen(PORT, () => console.log(`Server Running on port: http://localhost:${PORT}`))) //Using .then async function to return a promise i.e success message if server is running successfully
+    .then(() => app.listen(PORT, () => console.log(`Server Running on port: http://localhost:${PORT} and Connection to the Database Successfull :)`))) //Using .then async function to return a promise i.e success message if server is running successfully
     .catch((error) => console.log(error.message)); //to catch error if server is not running properly.
