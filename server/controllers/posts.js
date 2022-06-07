@@ -23,7 +23,7 @@ export const createPost = async (req, res) => {
         });
     }
 }
-
+// logic to UPDATE posts
 export const updatePost = async(req,res) => {
     const { id: _id } = req.params; 
     const post = req.body // post is sent from the front-end
@@ -35,3 +35,13 @@ export const updatePost = async(req,res) => {
     res.json(updatePost);
 }
 
+// Logic to DELETE posts
+export const deletePost = async(req,res) => {
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post exists with that id');
+
+    await PostMessage.findByIdAndRemove(id);
+    res.json({ message: 'Post has been deleted'})
+
+}
