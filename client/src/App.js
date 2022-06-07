@@ -14,27 +14,28 @@ const App = () => {
 
     useEffect (() => {
         dispatch(getPosts());
+
     }, [dispatch]);
 
     return (
         <Container maxidth="lg">
             <AppBar className={classes.appBar} position='static' color='inherit'>
-                <Typography className={classes.heading} variant="h2" align="center">POSTAGRAM : Memories Application</Typography>
+                <Typography className={classes.heading} varient="h2" align="center">POSTAGRAM : Memories Application</Typography>
                 <img className={classes.image} src={memories} alt="memories" height="60" />
 
             </AppBar>
             <Grow in>
                 <Container>
-                    <Grid Container justify="space-between" alignItems="stretch" spacing={3}>
-                        <Grid item xs={12} sm={7}>
-                            <Posts />
-                        </Grid>
+              <Grid Container justify="space-between" alignItems="stretch" spacing={3}  style={{display: "flex"}}>
+
+               <Grid item xs={12} sm={7}>
+                              <Posts />
+                          </Grid>
                         <Grid item xs={12} sm={4}>
                             <Form />
                         </Grid>
                     </Grid>
                 </Container>
-
             </Grow>
         </Container>
     );
