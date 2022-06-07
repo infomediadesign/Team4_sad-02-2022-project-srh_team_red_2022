@@ -14,6 +14,7 @@ export default (posts = [], action) => {
       return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
     case 'CREATE':
       return [...posts, action.payload];
+      // after the API call , action.payload is the newly updated post
     case 'UPDATE':
       return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
     case 'DELETE':

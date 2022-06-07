@@ -22,6 +22,7 @@ export const createPost = (post) => async (dispatch) => {
   }
 };
 
+// API request to update posts
 export const updatePost = (id, post) => async (dispatch) => {
   try {
     const { data } = await api.updatePost(id, post);
