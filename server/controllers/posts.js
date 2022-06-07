@@ -22,3 +22,14 @@ export const createPost = async (req, res) => {
         });
     }
 }
+
+export const updatePost = async(req,res) => {
+    const { id: _id } = req.params; 
+    const post = req.body // post is sent from the front-end
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post exists with that id')
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post,{new: true}); // to receive updated version of the post
+
+    res.json(updatePost);
+}
