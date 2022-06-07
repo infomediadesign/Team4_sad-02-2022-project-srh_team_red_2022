@@ -33,12 +33,14 @@ const Form = ({ currentId, setCurrentId }) => {
     } else {
       dispatch(createPost(postData)); 
     }
-
+    clear();
       
   };
 
+  // To clear the form when CLEAR is clicked
   const clear = () => {
-
+    setCurrentId(null);
+    setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' })
   }
 
   return (

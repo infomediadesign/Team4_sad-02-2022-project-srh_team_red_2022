@@ -15,10 +15,12 @@ const App = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    // after every SUBMIT, we get get a new post on the page
+    // without manually refreshing the page
     useEffect (() => {
         dispatch(getPosts());
 
-    }, [dispatch]);
+    }, [currentId,dispatch]);
 
     return (
         <Container maxidth="lg">
