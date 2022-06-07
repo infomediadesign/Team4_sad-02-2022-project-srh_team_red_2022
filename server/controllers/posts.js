@@ -33,3 +33,4 @@ export const updatePost = async(req,res) => {
 
     res.json(updatePost);
 }
+
