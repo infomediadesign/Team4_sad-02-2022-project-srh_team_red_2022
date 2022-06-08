@@ -2,10 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
-
+import dotenv from 'dotenv';
 import postRoutes from './routes/posts.js';
 
 const app = express();
+dotenv.config();
 
 //Setup of the body parser so that we can send our requests for e.g: image and imageUrl
 app.use(bodyParser.json({
@@ -24,10 +25,10 @@ app.use('/posts', postRoutes);
 // Setup/Connection for Mongodb cloud database using Atlas to create cluster
 // Connect Server Application to the datatbase https://www.mongodb.com/cloud/atlas
 
-const CONNECTION_URL = 'mongodb+srv://srhmernproject:Teamred12345@cluster0.y8eulcd.mongodb.net/?retryWrites=true&w=majority'; //In real Application the creditials should be secured so we will later change this and store this in the environment variables for security reasons. 
-const PORT = process.env.PORT||5000;
+//const CONNECTION_URL = 'mongodb+srv://srhmernproject:Teamred12345@cluster0.y8eulcd.mongodb.net/?retryWrites=true&w=majority'; //In real Application the creditials should be secured so we will later change this and store this in the environment variables for security reasons. 
+const PORT = process.env.PORT || 5000;
 
-mongoose.connect(CONNECTION_URL, {
+mongoose.connect(process.env.CONNECTION_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }) //We have set to true to avoid the warnings and errors in the console.
