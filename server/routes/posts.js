@@ -1,10 +1,12 @@
 import express from 'express';
+//import { likePost } from '../../client/src/api/index.js';
 
 import {
     getPosts,
     createPost,
     updatePost,
-    deletePost
+    deletePost,
+    likePost
     
 } from '../controllers/posts.js';
 const router = express.Router();
@@ -16,5 +18,8 @@ router.patch('/:id', updatePost)
 
 // DELETING POSTS
 router.delete('/:id', deletePost)
+
+// LIKE posts
+router.patch('/:id/likePost',likePost)
 
 export default router;
