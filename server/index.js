@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import postRoutes from './routes/posts.js';
+import userRoutes from './routes/posts.js';
+
 
 const app = express();
 dotenv.config();
@@ -22,6 +24,7 @@ app.use(bodyParser.urlencoded({
 // To initialise cors and call it as a function
 app.use(cors());
 app.use('/posts', postRoutes);
+app.use('/user', userRoutes);
 // Setup/Connection for Mongodb cloud database using Atlas to create cluster
 // Connect Server Application to the datatbase https://www.mongodb.com/cloud/atlas
 
