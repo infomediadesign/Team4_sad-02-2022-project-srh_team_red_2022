@@ -9,17 +9,20 @@ import {
     likePost
     
 } from '../controllers/posts.js';
+import auth from '../middleware/auth.js';
+
 const router = express.Router();
+
 router.get('/', getPosts);
-router.post('/', createPost);
+router.post('/',auth, createPost);
 // UPDATING POSTS
 // fetch ID of existing post
-router.patch('/:id', updatePost)
+router.patch('/:id',auth, updatePost)
 
 // DELETING POSTS
-router.delete('/:id', deletePost)
+router.delete('/:id',auth, deletePost)
 
 // LIKE posts
-router.patch('/:id/likePost',likePost)
+router.patch('/:id/likePost',auth,likePost)
 
 export default router;
