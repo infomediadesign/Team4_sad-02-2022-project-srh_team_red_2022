@@ -6,24 +6,24 @@ import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import Icon from './icon';
-import { signin, signup } from '../../actions/auth';
+import { signin, signup } from '../../actions/auth.js';
+import { AUTH } from '../../constants/actionTypes';
 import useStyles from './styles';
 import Input from './Input';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-const SignUp = () => {
-  const [form, setForm] = useState(initialState);
+const Auth = () => {
+  const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   const switchMode = () => {
-    setForm(initialState);
+    setFormData(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
@@ -32,9 +32,9 @@ const SignUp = () => {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(form, history));
+      dispatch(signup(formData, history));
     } else {
-      dispatch(signin(form, history));
+      dispatch(signin(formData, history));
     }
   };
 
@@ -51,9 +51,12 @@ const SignUp = () => {
     }
   };
 
-  const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
+  const googleFailure = (error) => {
+    console.log(error);
+    console.log('Google Sign In was unsuccessful. Try again later');
+  };
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -85,7 +88,7 @@ const SignUp = () => {
               </Button>
             )}
             onSuccess={googleSuccess}
-            onFailure={googleError}
+            onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           />
           <Grid container justify="flex-end">
@@ -101,4 +104,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Auth;

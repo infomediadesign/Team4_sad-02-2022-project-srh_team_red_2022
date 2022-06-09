@@ -4,8 +4,8 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 
-import memoriesLogo from '../../images/memoriesLogo.png';
-import memoriesText from '../../images/memoriesText.png';
+import memoriesLogo from '../../images/memories.png';
+import memoriesText from '../../images/memoriesText.jpg';
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
 
@@ -16,6 +16,7 @@ const Navbar = () => {
   const history = useHistory();
   const classes = useStyles();
 
+  //After the user's Token has expired it logsout and Pushes back to the Sign Page.
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
 
@@ -24,22 +25,23 @@ const Navbar = () => {
     setUser(null);
   };
 
+  //To check if the Token is expired. The user cant do any action after 1 hour
   useEffect(() => {
     const token = user?.token;
-
+    //Logic for user sign in through jwt 
     if (token) {
       const decodedToken = decode(token);
-
+     //value in miliseconds
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
-
+    //Logic for user sign in using GoogleOuath
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <Link to="/" className={classes.brandContainer}>
-        <img component={Link} to="/" src={memoriesText} alt="icon" height="45px" />
+        <img component={Link} to="/" src={memoriesText} alt="icon" height="80px" />
         <img className={classes.image} src={memoriesLogo} alt="icon" height="40px" />
       </Link>
       <Toolbar className={classes.toolbar}>
