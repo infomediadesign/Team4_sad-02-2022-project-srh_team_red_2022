@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
 // the find method returns only 1 thing
-  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId): null );
+  const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId): null );
 
 
   const classes = useStyles();
