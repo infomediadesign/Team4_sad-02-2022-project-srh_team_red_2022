@@ -3,28 +3,49 @@ import {
   CREATE,
   UPDATE,
   DELETE,
-  LIKE
+  LIKE,
+  FETCH_BY_SEARCH,
+  START_LOADING,
+  END_LOADING
+
 } from '../constants/actionTypes';
 
-export default (posts = [], action) => {
+export default (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
+    case START_LOADING:
+      return { ...state, isloading: true} ;
+    case END_LOADING:
+      return { ...state, isloading: true} ;
     case FETCH_ALL:
-      return action.payload;
+      return {
+        ...state.posts,
+        posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPages:action.payload.numberOfPages,
+      };
+
+     case FETCH_BY_SEARCH: 
+     return { ...state,posts: action.payload} ;
+
     case CREATE:
-      return [...posts, action.payload];
+      return { ...state,posts:[...state.posts, action.payload]};
       // after the API call , action.payload is the newly updated post
 
        // LIKE has same Logic as update function
     case UPDATE:
+
+      return { ...state,posts:state.posts.map((post) => (post._id === action.payload._id ? action.payload : post))};
+
+
     case LIKE:
 
-      return posts.map((post) => (post._id === action.payload._id ? action.payload : post));
+      return { ...state,posts:state.posts.map((post) => (post._id === action.payload._id ? action.payload : post))};
     
-    // We use filter because we keep all posts which are NOT equal to action.payload
+    // We use filter because we keep all post which are NOT equal to action.payload
     case DELETE:
-      return posts.filter((post) => post._id !== action.payload);
+      return { ...state,posts:state.posts.filter((post) => post._id !== action.payload)};
 
     default:
-      return posts;
+      return state;
   }
 };
