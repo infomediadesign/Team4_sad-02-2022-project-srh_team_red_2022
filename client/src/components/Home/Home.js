@@ -62,7 +62,7 @@ const Home = () => {
                     <Grid item xs={12} sm={6} md={9}>
                            <Posts setCurrentId = {setCurrentId}/>
                           </Grid>
-                        <Grid item xs={12} sm={6} md={3}>
+                        <Grid item xs={2} sm={4} md={3} style={{marginLeft: 10}}>
                         <AppBar className={classes.appBarSearch} position="static" color="inherit">
                         <TextField  
                         name="search" 
